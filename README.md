@@ -4,7 +4,7 @@ Manga application for reading and downloading manga.
 
 ## Requirements
 
-[Node.jS v10^](https://nodejs.org/en/)
+[Node.js v10^](https://nodejs.org/en/)
 
 [Yarn v1.13.0](https://yarnpkg.com/en/)
 

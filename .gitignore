@@ -3,8 +3,9 @@ node_modules/*
 build/*
 dist/*
 release/*
+log/*
+logs/*
 
 #Generated
 *.log
-log/*
-logs/*
+*.yaml

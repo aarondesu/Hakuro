@@ -13,7 +13,7 @@ const renderApplication = Component => {
         <Component />
       </Provider>
     </AppContainer>,
-    document.getElementById("index")
+    document.getElementById("app")
   );
 };
 

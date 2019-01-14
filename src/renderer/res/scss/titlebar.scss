@@ -1,3 +1,5 @@
+$titlebar-background-color: #222;
+
 .titlebar {
   -webkit-app-region: drag !important;
   -webkit-user-select: none;
@@ -5,7 +7,7 @@
   height: 30px;
   margin: 0;
   padding: 0;
-  background-color: #222;
+  background-color: $titlebar-background-color;
 
   .window-buttons {
     float: right;

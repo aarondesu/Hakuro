@@ -21,6 +21,7 @@ const createWindow = async () => {
 
   // Create the window
   var window = new BrowserWindow({
+    title: "Hakuro - Manga Application",
     x: windowState.x,
     y: windowState.y,
     width: windowState.width,
@@ -46,8 +47,13 @@ const createWindow = async () => {
         })
   );
 
+  // Remove menubar
+  window.setMenu(null);
+
   window.webContents.on("did-finish-load", () => {
     window.show();
+    // Open webtools for debugging
+    window.webContents.openDevTools();
   });
 
   windowState.manage(window);
@@ -55,8 +61,6 @@ const createWindow = async () => {
   if (NODE_ENV === "development") {
     // Display info on log
     log.info("App starting in development mode...");
-    // Open webtools for debugging
-    window.webContents.openDevTools();
 
     const {
       default: installExtension,
