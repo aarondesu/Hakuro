@@ -1,0 +1,80 @@
+{
+  "name": "manga-app",
+  "version": "0.0.1",
+  "description": "Desktop app for viewing/downloading manga",
+  "main": "src/main.js",
+  "author": "Shinudesu",
+  "license": "MIT",
+  "scripts": {
+    "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"wait-on http://localhost:8080/ && cross-env NODE_ENV=development electron src/main.js\"",
+    "electron-prod": "cross-env NODE_ENV=production webpack --mode production --config webpack/prod.config.js",
+    "electron-pack": "yarn electron-prod && build - em.main=src.main.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "concurrently": "^4.1.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^2.1.0",
+    "electron": "^4.0.1",
+    "electron-is-dev": "^1.0.1",
+    "electron-builder": "^20.38.4",
+    "electron-devtools-installer": "^2.2.4",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.6.3",
+    "style-loader": "^0.23.1",
+    "wait-on": "^3.2.0",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^3.10.0",
+    "@blueprintjs/icons": "^3.4.0",
+    "electron-log": "^2.2.17",
+    "electron-window-state": "^5.0.3",
+    "chalk": "^2.4.2",
+    "common-tags": "^1.8.0",
+    "cross-env": "^5.2.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "node-sass": "^4.11.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-router-page-transition": "^3.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "^7.1.0",
+    "source-map-support": "^0.5.9",
+    "winston": "^3.1.0"
+  },
+  "build": {
+    "productName": "Project Manga App",
+    "copyright": "",
+    "asar": true,
+    "win": {
+      "target": "NSIS"
+    },
+    "files": [
+      "src",
+      "build",
+      "*.js"
+    ],
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
+      "license": "LICENSE",
+      "deleteAppDataOnUninstall": true
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}

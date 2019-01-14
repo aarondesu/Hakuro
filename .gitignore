@@ -1,0 +1,10 @@
+#General
+node_modules/*
+build/*
+dist/*
+release/*
+
+#Generated
+*.log
+log/*
+logs/*
