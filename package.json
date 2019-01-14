@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"wait-on http://localhost:8080/ && cross-env NODE_ENV=development electron src/main.js\"",
-    "electron-prod": "cross-env NODE_ENV=production webpack --mode production --config webpack/prod.config.js",
-    "electron-pack": "yarn electron-prod && build - em.main=src.main.js"
+    "electron-pre-release": "cross-env NODE_ENV=pre-release webpack --mode production --config webpack.dev.config.js && build - em.main=src.main.js",
+    "electron-release": "cross-env NODE_ENV=release webpack --mode production --config webpack/prod.config.js && build - em.main=src.main.js"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

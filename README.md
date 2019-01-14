@@ -26,5 +26,5 @@ yarn electron-dev
 For production:
 
 ```
-yarn electron-pack
+yarn electron-release
 ```
