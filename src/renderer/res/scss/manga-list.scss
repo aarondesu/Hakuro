@@ -1,0 +1,30 @@
+.manga-list-container {
+  width: 100% !important;
+
+  .manga-item-container {
+    max-width: 180px;
+    max-height: 255px;
+
+    margin: 0;
+    padding: 0;
+
+    .image-container {
+      width: 180px;
+      height: 255px;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+
+      img {
+        position: absolute;
+      }
+    }
+
+    .title-container {
+      word-wrap: break-word;
+      max-width: 255px;
+    }
+  }
+}

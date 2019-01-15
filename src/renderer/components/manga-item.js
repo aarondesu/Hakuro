@@ -1,21 +1,21 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
 
-import "../res/scss/manga-item.scss";
-
-const MangaItem = manga => (
-  <Paper className="manga-item-container">
-    <div className="image-container">
-      <img
-        src={
-          manga.im !== null
-            ? `https://cdn.mangaeden.com/mangasimg/${manga.im}`
-            : ""
-        }
-      />
-    </div>
-    <div className="tile-container">{manga.a.replace("-", " ")}</div>
-  </Paper>
-);
+//
+const MangaItem = props => {
+  return (
+    <Paper className="manga-item-container" square>
+      <div className="image-container">
+        <img
+          src={
+            props.manga.im !== null
+              ? `https://cdn.mangaeden.com/mangasimg/${props.manga.im}`
+              : ""
+          }
+        />
+      </div>
+    </Paper>
+  );
+};
 
 export default MangaItem;

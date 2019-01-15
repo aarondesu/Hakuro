@@ -52,15 +52,15 @@ const createWindow = async () => {
 
   window.webContents.on("did-finish-load", () => {
     window.show();
-    // Open webtools for debugging
-    window.webContents.openDevTools();
   });
 
   windowState.manage(window);
 
-  if (NODE_ENV === "development") {
+  if (NODE_ENV === "development" || NODE_ENV === "pre-release") {
     // Display info on log
     log.info("App starting in development mode...");
+    // Open webtools for debugging
+    window.webContents.openDevTools();
 
     const {
       default: installExtension,

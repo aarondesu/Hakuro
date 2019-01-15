@@ -1,22 +1,28 @@
 import React from "react";
 import { Route, HashRouter, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  withStyles
+} from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { updateUser } from "./actions/user-actions";
 import MangaListPage from "./pages/manga-list";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
+import { THEMES } from "./themes/";
 
 import "./res/scss/app.scss";
 
 const Application = ({}) => (
   <div className="container">
     <HashRouter>
-      <React.Fragment>
+      <MuiThemeProvider theme={THEMES.DefaultTheme}>
         <CssBaseline />
         <Switch>
           <Route path="/" component={MangaListPage} />
         </Switch>
-      </React.Fragment>
+      </MuiThemeProvider>
     </HashRouter>
   </div>
 );

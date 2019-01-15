@@ -15,6 +15,14 @@ const reducers = combineReducers({
   allManga: allManga
 });
 
-const storeEnhancers = compose(applyMiddleware(thunk));
+let storeEnhancers;
+if (NODE_ENV === "development" || NODE_ENV === "pre-release") {
+  storeEnhancers = compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+} else {
+  storeEnhancers = compose(applyMiddleware(thunk));
+}
 
 export const store = createStore(reducers, tempInitialData, storeEnhancers);

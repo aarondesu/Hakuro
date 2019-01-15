@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"wait-on http://localhost:8080/ && cross-env NODE_ENV=development electron src/main.js\"",
-    "electron-pre-release": "cross-env NODE_ENV=pre-release webpack --mode production --config webpack.dev.config.js && build - em.main=src.main.js",
+    "electron-pre-release": "cross-env NODE_ENV=pre-release webpack --mode production --config webpack/dev.config.js && build - em.main=src.main.js",
     "electron-release": "cross-env NODE_ENV=release webpack --mode production --config webpack/prod.config.js && build - em.main=src.main.js"
   },
   "devDependencies": {
@@ -23,19 +23,18 @@
     "electron-devtools-installer": "^2.2.4",
     "electron-is-dev": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
     "react-hot-loader": "^4.6.3",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "wait-on": "^3.2.0",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0"
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
     "@material-ui/core": "^3.8.3",
     "@material-ui/icons": "^3.0.2",
-    "chalk": "^2.4.2",
     "common-tags": "^1.8.0",
     "cross-env": "^5.2.0",
     "electron-log": "^2.2.17",
