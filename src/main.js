@@ -5,6 +5,7 @@ const log = require("electron-log");
 const path = require("path");
 const url = require("url");
 
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = true;
 const { NODE_ENV } = process.env;
 
 // TODO: Add a slpash screen
@@ -86,15 +87,46 @@ const createWindow = async () => {
   return window;
 };
 
+const applicationStart = () => {
+  // Check if development or not
+  if (NODE_ENV !== "development") {
+    const apiServer = require("child_process").fork(
+      require.resolve("./api/server.js"),
+      [],
+      { silent: true }
+    );
+
+    apiServer.stdout.on("data", data => {
+      // Get output from the api
+      const serverOutput = data.toString("utf8");
+
+      // Display information on console
+      log.info(serverOutput);
+      // Check the output
+      if (serverOutput.indexOf("server api started.") != -1) {
+        mainWindow = createWindow();
+      }
+    });
+
+    apiServer.on("exit", (code, signale) => {
+      // TODO: Do something
+    });
+
+    apiServer.on("error", err => log.error);
+  } else {
+    mainWindow = createWindow();
+  }
+};
+
 // Application event handlers
 // WINDOWS
 app.on("ready", () => {
-  mainWindow = createWindow();
+  applicationStart();
 });
 // MAC OS
 app.on("activate", () => {
   if (mainWindow == null) {
-    mainWindow = createWindow();
+    applicationStart();
   }
 });
 app.on("window-all-closed", () => {

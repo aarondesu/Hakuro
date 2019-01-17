@@ -18,19 +18,37 @@ var { app } = window.require("electron").remote;
 
 import "./res/scss/app.scss";
 
-const Application = () => {
-  return (
-    <div className="container">
-      <HashRouter>
-        <MuiThemeProvider theme={THEMES.DefaultTheme}>
-          <CssBaseline />
-          <Switch>
-            <Route path="/" component={MangaListPage} />
-          </Switch>
-        </MuiThemeProvider>
-      </HashRouter>
-    </div>
-  );
-};
+class Application extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // Check if file exists
+    const mangaJsonPath = path.join(
+      app.getPath("appData"),
+      "/Hakuro/mangas.json"
+    );
+
+    fs.exists(mangaJsonPath, exists => {
+      if (!exists) {
+        fs.writeFile(mangaJsonPath, "hello world!!!", err => console.error);
+      }
+    });
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <HashRouter>
+          <MuiThemeProvider theme={THEMES.DefaultTheme}>
+            <CssBaseline />
+            <Switch>
+              <Route path="/" component={MangaListPage} />
+            </Switch>
+          </MuiThemeProvider>
+        </HashRouter>
+      </div>
+    );
+  }
+}
 
 export default Application;

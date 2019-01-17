@@ -12,3 +12,5 @@ export const allManga = (state = [], action) => {
 export const searchedManga = (state = [], action) => {
   console.log("Searched Manga");
 };
+
+export const popularManga = (state = [], action) => {};

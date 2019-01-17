@@ -4,9 +4,11 @@
   "description": "Desktop app for viewing/downloading manga",
   "main": "src/main.js",
   "author": "Shinudesu",
+  "repository": "https://github.com/Shinudesu/Hakuro",
   "license": "MIT",
   "scripts": {
-    "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"wait-on http://localhost:8080/ && cross-env NODE_ENV=development electron src/main.js\"",
+    "wait-host": "wait-on http://localhost:8080/ ",
+    "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"yarn wait-host && cross-env NODE_ENV=development electron src/main.js\"",
     "electron-pre-release": "cross-env NODE_ENV=pre-release webpack --mode production --config webpack/dev.config.js && build - em.main=src.main.js",
     "electron-release": "cross-env NODE_ENV=release webpack --mode production --config webpack/prod.config.js && build - em.main=src.main.js"
   },
@@ -38,6 +40,7 @@
     "common-tags": "^1.8.0",
     "cross-env": "^5.2.0",
     "electron-log": "^2.2.17",
+    "electron-updater": "^4.0.6",
     "electron-window-state": "^5.0.3",
     "jquery": "^3.3.1",
     "moment": "^2.23.0",

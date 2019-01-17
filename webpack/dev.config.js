@@ -5,7 +5,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   target: "node-webkit",
   entry: {
-    renderer: "./src/renderer/index.js"
+    renderer: "./src/app/index.js"
   },
   output: {
     path: path.join(__dirname, "../build/"),

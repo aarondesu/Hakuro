@@ -1,27 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Button, Typography, Grid, Paper } from "@material-ui/core";
+import {} from "react-router-dom";
 
 import MangaItem from "../components/manga-item";
 import { doGetMangaList } from "../actions/list-action";
 
 import "../res/scss/manga-list.scss";
 
-// Set props
-const mapStateProps = state => ({
-  allManga: state.allManga
-});
-
-const mapActionProps = dispatch => ({
-  doGetMangaList: page => dispatch(doGetMangaList(page))
-});
-
 // Manga Page class
 class MangaListPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log("Component mounted");
     this.props.doGetMangaList(0);
@@ -50,6 +38,15 @@ class MangaListPage extends React.Component {
     );
   }
 }
+
+// Set props
+const mapStateProps = state => ({
+  allManga: state.allManga
+});
+
+const mapActionProps = dispatch => ({
+  doGetMangaList: page => dispatch(doGetMangaList(page))
+});
 
 export default connect(
   mapStateProps,
