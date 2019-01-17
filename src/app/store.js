@@ -26,3 +26,11 @@ if (NODE_ENV === "development" || NODE_ENV === "pre-release") {
 }
 
 export const store = createStore(reducers, tempInitialData, storeEnhancers);
+
+// Handle Subscription
+let previousValue = {};
+store.subscribe(() => {
+  let currentValue = store.getState();
+
+  previousValue = currentValue;
+});

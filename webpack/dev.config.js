@@ -3,6 +3,7 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  target: "node-webkit",
   entry: {
     renderer: "./src/renderer/index.js"
   },

@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { Button, Typography, Grid, Paper } from "@material-ui/core";
 
 import MangaItem from "../components/manga-item";
 import { doGetMangaList } from "../actions/list-action";
-import { Button, Typography, Grid, Paper } from "@material-ui/core";
 
 import "../res/scss/manga-list.scss";
 
@@ -51,10 +50,6 @@ class MangaListPage extends React.Component {
     );
   }
 }
-
-MangaListPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default connect(
   mapStateProps,
