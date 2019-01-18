@@ -4,7 +4,7 @@ import { Button, Typography, Grid, Paper } from "@material-ui/core";
 import {} from "react-router-dom";
 
 import MangaItem from "../components/manga-item";
-import { doGetMangaList } from "../actions/list-action";
+import { doGetMangaList } from "../actions/manga-action";
 
 import "../res/scss/manga-list.scss";
 
@@ -27,13 +27,7 @@ class MangaListPage extends React.Component {
           className="manga-list-container"
           spacing={24}
           justify="center"
-        >
-          {this.props.allManga.map(manga => (
-            <Grid key={manga.im} item>
-              <MangaItem manga={manga} classes={this.props.classes} />
-            </Grid>
-          ))}
-        </Grid>
+        />
       </div>
     );
   }
@@ -41,7 +35,7 @@ class MangaListPage extends React.Component {
 
 // Set props
 const mapStateProps = state => ({
-  allManga: state.allManga
+  mangaList: state.mangaList
 });
 
 const mapActionProps = dispatch => ({

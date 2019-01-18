@@ -1,6 +1,6 @@
-import { UPDATE_MANGA_LIST } from "../actions/list-action";
+import { UPDATE_MANGA_LIST, UPDATE_MANGA_INFO } from "../actions/manga-action";
 
-export const allManga = (state = [], action) => {
+export const mangaList = (state = [], action) => {
   switch (action.type) {
     case UPDATE_MANGA_LIST:
       return action.data;
@@ -9,8 +9,11 @@ export const allManga = (state = [], action) => {
   }
 };
 
-export const searchedManga = (state = [], action) => {
-  console.log("Searched Manga");
+export const mangaInfo = (state = [], action) => {
+  switch (action.type) {
+    case UPDATE_MANGA_INFO:
+      return action.data;
+    default:
+      return state;
+  }
 };
-
-export const popularManga = (state = [], action) => {};

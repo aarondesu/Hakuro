@@ -1,20 +1,22 @@
 import thunk from "redux-thunk";
 import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 
-import { allManga } from "./reducers/manga-reducer";
+import { mangaList, mangaInfo } from "./reducers/manga-reducer";
 
-const NODE_ENV = window.process.env;
+const { NODE_ENV } = window.process.env;
 
 const tempInitialData = {
-  allManga: []
+  mangaList: []
 };
 
 const reducers = combineReducers({
-  allManga: allManga
+  mangaList: mangaList,
+  mangaInfo: mangaInfo
 });
 
 let storeEnhancers;
-if (NODE_ENV === "development" || NODE_ENV === "pre-release") {
+if (NODE_ENV === "development") {
+  console.log("Store(development)");
   storeEnhancers = compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

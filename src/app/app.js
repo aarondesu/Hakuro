@@ -7,8 +7,8 @@ import {
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import { updateUser } from "./actions/user-actions";
 import MangaListPage from "./pages/manga-list";
+import TestPage from "./pages/test-page";
 
 import { THEMES } from "./themes/";
 
@@ -19,22 +19,6 @@ var { app } = window.require("electron").remote;
 import "./res/scss/app.scss";
 
 class Application extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // Check if file exists
-    const mangaJsonPath = path.join(
-      app.getPath("appData"),
-      "/Hakuro/mangas.json"
-    );
-
-    fs.exists(mangaJsonPath, exists => {
-      if (!exists) {
-        fs.writeFile(mangaJsonPath, "hello world!!!", err => console.error);
-      }
-    });
-  }
-
   render() {
     return (
       <div className="container">
@@ -42,7 +26,7 @@ class Application extends React.Component {
           <MuiThemeProvider theme={THEMES.DefaultTheme}>
             <CssBaseline />
             <Switch>
-              <Route path="/" component={MangaListPage} />
+              <Route path="/" component={TestPage} />
             </Switch>
           </MuiThemeProvider>
         </HashRouter>

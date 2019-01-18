@@ -10,7 +10,7 @@
     "wait-host": "wait-on http://localhost:8080/ ",
     "electron-dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --mode development --config webpack/dev.config.js\" \"yarn wait-host && cross-env NODE_ENV=development electron src/main.js\"",
     "electron-pre-release": "cross-env NODE_ENV=pre-release webpack --mode production --config webpack/dev.config.js && build - em.main=src.main.js",
-    "electron-release": "cross-env NODE_ENV=release webpack --mode production --config webpack/prod.config.js && build - em.main=src.main.js"
+    "electron-release": "cross-env NODE_ENV=production webpack --mode production --config webpack/prod.config.js && build - em.main=src.main.js"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -37,13 +37,14 @@
   "dependencies": {
     "@material-ui/core": "^3.8.3",
     "@material-ui/icons": "^3.0.2",
-    "common-tags": "^1.8.0",
+    "cheerio": "^1.0.0-rc.2",
     "cross-env": "^5.2.0",
     "electron-log": "^2.2.17",
     "electron-updater": "^4.0.6",
     "electron-window-state": "^5.0.3",
     "jquery": "^3.3.1",
     "moment": "^2.23.0",
+    "puppeteer": "^1.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
@@ -51,11 +52,28 @@
     "react-router-page-transition": "^3.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "source-map-support": "^0.5.9",
-    "typeface-roboto": "^0.0.54",
-    "winston": "^3.1.0"
+    "tough-cookie": "3.0.0",
+    "typeface-roboto": "^0.0.54"
+  },
+  "browser": {
+    "./lib/BrowserFetcher.js": false,
+    "./node6/lib/Puppeteer": false,
+    "ws": "./utils/browser/WebSocket",
+    "fs": false,
+    "child_process": false,
+    "rimraf": false,
+    "readline": false
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "json"
+    ]
   },
   "build": {
+    "appId": "com.github.Shinudesu.Haruko",
     "productName": "Hakuro",
     "copyright": "",
     "asar": true,
@@ -78,6 +96,13 @@
     },
     "directories": {
       "output": "release"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Shinudesu",
+        "repo": "Haruko"
+      }
+    ]
   }
 }

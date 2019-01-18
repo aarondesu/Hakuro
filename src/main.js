@@ -1,12 +1,16 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const windowStateKeeper = require("electron-window-state");
+const { autoUpdater } = require("electron-updater");
 
 const log = require("electron-log");
 const path = require("path");
 const url = require("url");
 
-process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = true;
 const { NODE_ENV } = process.env;
+
+// Initialize some settings
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = true;
+log.transports.file.level = "info";
 
 // TODO: Add a slpash screen
 const createSplashScreen = () => {};
@@ -88,45 +92,28 @@ const createWindow = async () => {
 };
 
 const applicationStart = () => {
-  // Check if development or not
-  if (NODE_ENV !== "development") {
-    const apiServer = require("child_process").fork(
-      require.resolve("./api/server.js"),
-      [],
-      { silent: true }
-    );
-
-    apiServer.stdout.on("data", data => {
-      // Get output from the api
-      const serverOutput = data.toString("utf8");
-
-      // Display information on console
-      log.info(serverOutput);
-      // Check the output
-      if (serverOutput.indexOf("server api started.") != -1) {
-        mainWindow = createWindow();
-      }
-    });
-
-    apiServer.on("exit", (code, signale) => {
-      // TODO: Do something
-    });
-
-    apiServer.on("error", err => log.error);
-  } else {
-    mainWindow = createWindow();
-  }
+  // Display info
+  log.info("Starting application...");
+  mainWindow = createWindow();
 };
 
 // Application event handlers
 // WINDOWS
 app.on("ready", () => {
   applicationStart();
+  // Check if not developemnt
+  if (NODE_ENV !== "development") {
+    // autoUpdater.checkForUpdates();
+  }
 });
 // MAC OS
 app.on("activate", () => {
   if (mainWindow == null) {
     applicationStart();
+    // Check if not development
+    if (NODE_ENV !== "development") {
+      // autoUpdater.checkForUpdates();
+    }
   }
 });
 app.on("window-all-closed", () => {
@@ -134,4 +121,13 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+// Updater stuff
+autoUpdater.on("update-downloaded", info => {
+  mainWindow.webContents.send("updateReady");
+});
+
+ipcMain.on("quitAndInstall", (event, args) => {
+  autoUpdater.quitAndInstall();
 });
