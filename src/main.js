@@ -16,7 +16,7 @@ log.transports.file.level = "info";
 const createSplashScreen = () => {};
 
 // Create the window
-var mainWindow;
+let mainWindow;
 const createWindow = async () => {
   // Create the window state handler
   var windowState = windowStateKeeper({
@@ -25,7 +25,7 @@ const createWindow = async () => {
   });
 
   // Create the window
-  var window = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: "Hakuro - Manga Application",
     x: windowState.x,
     y: windowState.y,
@@ -42,7 +42,7 @@ const createWindow = async () => {
   });
 
   // Load the contents
-  window.loadURL(
+  mainWindow.loadURL(
     NODE_ENV === "development"
       ? "http://localhost:8080/"
       : url.format({
@@ -53,19 +53,19 @@ const createWindow = async () => {
   );
 
   // Remove menubar
-  window.setMenu(null);
+  mainWindow.setMenu(null);
 
-  window.webContents.on("did-finish-load", () => {
-    window.show();
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.show();
   });
 
-  windowState.manage(window);
+  windowState.manage(mainWindow);
 
   if (NODE_ENV === "development" || NODE_ENV === "pre-release") {
     // Display info on log
     log.info("App starting in development mode...");
     // Open webtools for debugging
-    window.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     const {
       default: installExtension,
@@ -84,17 +84,15 @@ const createWindow = async () => {
       .catch(err => log.error(`Error installing extension: ${err}`));
   }
 
-  window.on("closed", () => {
-    window = null;
+  mainWindow.on("closed", () => {
+    mainWindow = null;
   });
-
-  return window;
 };
 
 const applicationStart = () => {
   // Display info
   log.info("Starting application...");
-  mainWindow = createWindow();
+  createWindow();
 };
 
 // Application event handlers
@@ -123,6 +121,7 @@ app.on("window-all-closed", () => {
   }
 });
 
+/*
 // Updater stuff
 autoUpdater.on("update-downloaded", info => {
   mainWindow.webContents.send("updateReady");
@@ -131,3 +130,4 @@ autoUpdater.on("update-downloaded", info => {
 ipcMain.on("quitAndInstall", (event, args) => {
   autoUpdater.quitAndInstall();
 });
+*/
