@@ -1,10 +1,10 @@
 #General
-node_modules/*
-build/*
-dist/*
-release/*
-log/*
-logs/*
+node_modules/
+build/
+dist/
+release/
+log/
+logs/
 
 #Generated
 *.log
