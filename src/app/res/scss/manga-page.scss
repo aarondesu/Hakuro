@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+
+  .cover {
+    flex-flow: column;
+  }
+
+  .details {
+    flex-flow: column;
+    padding: 0px 15px 0px 15px;
+
+    .description {
+      margin-top: 10px;
+    }
+  }
+}
+
+.chapter-list {
+  padding: 15px;
+  margin-top: 10px;
+}

@@ -1,5 +1,3 @@
-import DefaultTheme from "./default-theme";
-
-export const THEMES = {
-  DefaultTheme
+export const Themes = {
+  defaultTheme: require("./default-theme").default
 };

@@ -123,7 +123,7 @@ module.exports = {
           .map(chapterEl => {
             return {
               href: chapterEl.attribs.href,
-              name: chapterEl.attribs.title,
+              name: chapterEl.children[1].children[1].firstChild.data,
               release: chapterEl.children[1].children[3].firstChild.data
             };
           });

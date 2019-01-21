@@ -5,6 +5,7 @@ const scraper = require("../tools/scraper");
 
 export const UPDATE_MANGA_LIST = "manga:getMangaList";
 export const UPDATE_MANGA_INFO = "manga:getMangaInfo";
+export const RESET_MANGA_INFO = "manga:resetMangaInfo";
 
 // Updates the list
 export const updateMangaList = data => ({
@@ -14,6 +15,11 @@ export const updateMangaList = data => ({
 
 export const updateMangaInfo = data => ({
   type: UPDATE_MANGA_INFO,
+  data
+});
+
+export const resetMangaInfo = data => ({
+  type: RESET_MANGA_INFO,
   data
 });
 
@@ -34,6 +40,7 @@ export const doGetMangaList = page => {
 };
 
 export const doGetMangaInfo = mangaId => {
+  console.log(`Called 'doGetMangaInfo' function. ID: ${mangaId}`);
   return (dispatch, getState) => {
     scraper
       ._getMangaInfo(mangaId)

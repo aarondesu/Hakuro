@@ -4,7 +4,7 @@ import { Button, Typography, Grid, Paper } from "@material-ui/core";
 import {} from "react-router-dom";
 
 import MangaItem from "../components/manga-item";
-import { doGetMangaList } from "../actions/manga-action";
+import { doGetMangaList, resetMangaInfo } from "../actions/manga-action";
 
 import "../res/scss/manga-list.scss";
 
@@ -13,22 +13,28 @@ class MangaListPage extends React.Component {
   componentDidMount() {
     console.log("Component mounted");
     this.props.doGetMangaList(0);
+    this.props.resetMangaInfo();
   }
 
   render() {
     return (
-      <div>
-        <Typography variant="h4" gutterBottom>
-          Manga List
-        </Typography>
-
+      <React.Fragment>
         <Grid
           container
           className="manga-list-container"
-          spacing={24}
+          spacing={32}
           justify="center"
-        />
-      </div>
+          zeroMinWidth
+        >
+          {this.props.mangaList.manga &&
+            this.props.mangaList.manga.map(manga => (
+              <Grid key={manga.href} item>
+                <MangaItem {...manga} />
+              </Grid>
+            ))}
+        </Grid>
+        >
+      </React.Fragment>
     );
   }
 }
@@ -39,7 +45,8 @@ const mapStateProps = state => ({
 });
 
 const mapActionProps = dispatch => ({
-  doGetMangaList: page => dispatch(doGetMangaList(page))
+  doGetMangaList: page => dispatch(doGetMangaList(page)),
+  resetMangaInfo: () => dispatch(resetMangaInfo())
 });
 
 export default connect(

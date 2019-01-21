@@ -6,7 +6,8 @@ import { mangaList, mangaInfo } from "./reducers/manga-reducer";
 const { NODE_ENV } = window.process.env;
 
 const tempInitialData = {
-  mangaList: []
+  mangaList: [],
+  mangaInfo: {}
 };
 
 const reducers = combineReducers({
